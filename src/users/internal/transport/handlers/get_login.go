@@ -9,7 +9,7 @@ import (
 )
 
 type GetLoginRequest struct {
-	Login    string `json:"login"`
+	Pseudo    string `json:"login"`
 	Password string `json:"password"`
 }
 
@@ -28,7 +28,7 @@ func GetLoginHandler(cmd utils.GetLoginCmd) http.HandlerFunc {
 			http.Error(rw, err.Error(), http.StatusBadRequest)
 			return
 		}
-		userId, err := cmd(req.Context(), getLoginRequest.Login, security.MD5(getLoginRequest.Password))
+		userId, err := cmd(req.Context(), getLoginRequest.Pseudo, security.MD5(getLoginRequest.Password))
 
 		if err != nil {
 			switch err {

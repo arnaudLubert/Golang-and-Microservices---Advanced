@@ -36,9 +36,18 @@ func CreateAd(storage ad.Storage) CreateAdCmd {
 			return "", domain.ErrAdNoPrice
 		}
 
-		if ad.Picture == "" {
+		if ad.Capacity <= 0 {
+			return "", domain.ErrAdNoCapacity
+		}
+
+		if len(ad.Pictures) == 0 {
 			return "", domain.ErrAdNoPicture
 		}
+
+		if ad.Location.Street == "" || ad.Location.City == "" || ad.Location.ZipCode == "" {
+			return "", domain.ErrAdNoLocation
+		}
+
 		if err = storage.Create(ctx, ad); err != nil {
 			return "", err
 		}

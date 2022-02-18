@@ -9,7 +9,7 @@ import (
 )
 
 type CreateUserRequest struct {
-    Login       string          `json:"login"`
+    Pseudo       string          `json:"login"`
     Email       string          `json:"email"`
     Password    string          `json:"password"`
     Firstname   string          `json:"firstname"`
@@ -35,12 +35,13 @@ func CreateUserHandler(cmd utils.CreateUserCmd) http.HandlerFunc {
             return
         }
 
-        if createUserReq.Login == "" || createUserReq.Email == "" || createUserReq.Password == "" {
+        if createUserReq.Pseudo == "" || createUserReq.Email == "" || createUserReq.Password == "" {
             http.Error(rw, "missing login, email nor password", http.StatusBadRequest)
             return
         }
+
         user := domain.User{
-            Login: createUserReq.Login,
+            Pseudo: createUserReq.Pseudo,
             Email: createUserReq.Email,
             Password: security.MD5(createUserReq.Password),
             Firstname: createUserReq.Firstname,
@@ -53,7 +54,10 @@ func CreateUserHandler(cmd utils.CreateUserCmd) http.HandlerFunc {
 
         if err != nil {
             switch err {
-            case domain.ErrUserAlreadyExists: http.Error(rw, err.Error(), http.StatusConflict)
+            case domain.ErrUserAlreadyExists:
+                http.Error(rw, err.Error(), http.StatusConflict)
+            case domain.ErrUnsecuredPassword:
+                http.Error(rw, err.Error(), http.StatusBadRequest)
             case domain.ErrAccessForbidden, domain.ErrOperationNotPermitted:
                 http.Error(rw, err.Error(), http.StatusForbidden)
             default: http.Error(rw, err.Error(), http.StatusInternalServerError)

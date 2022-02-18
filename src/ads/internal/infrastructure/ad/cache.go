@@ -19,10 +19,13 @@ func NewCache() *Cache {
 	if os.Getenv("ENV") == "dev" {
 		cache.Create(nil, domain.Ad{
 			ID:          "ad1",
-			Title:       "Something",
+			Title:       "Apartment",
+			Capacity:    2,
 			Description: "The description",
-			Price:       1,
+			Price:       70,
 			SellerID:    "1",
+			Pictures:    []string{"https://media.istockphoto.com/photos/business-district-with-tall-modern-office-buildings-at-amsterdam-zuid-picture-id1313787429?b=1&k=20&m=1313787429&s=170667a&w=0&h=_AK9s-kRHxiw3RG4ToobxwVI4bzjgHaq3TeOtTsRq6s=", "https://media.istockphoto.com/photos/modern-elegant-kitchen-stock-photo-picture-id1297586166?b=1&k=20&m=1297586166&s=170667a&w=0&h=Ka-3OYiTlbCiwCJhoXeTqRewh3DI4qfSh1B0baJMcCk="},
+			Location: 	 domain.Location{"Madrid", "28000", "Street name", "38.8951", "-77.0364"},
 		})
 	}
 
@@ -72,8 +75,24 @@ func (mem *Cache) Update(ctx context.Context, adID string, adData domain.Ad) err
 	if adData.Price >= 0 {
 		oldAd.Price = adData.Price
 	}
-	if adData.Picture != "" {
-		oldAd.Picture = adData.Picture
+	if adData.Capacity >= 0 {
+		oldAd.Capacity = adData.Capacity
+	}
+
+	if adData.Location.City != "" || adData.Location.ZipCode != "" || adData.Location.Street != "" {
+		if adData.Location.City != "" {
+			oldAd.Location.City = oldAd.Location.City
+		}
+		if adData.Location.ZipCode != "" {
+			oldAd.Location.ZipCode = oldAd.Location.ZipCode
+		}
+		if adData.Location.Street != "" {
+			oldAd.Location.Street = oldAd.Location.Street
+		}
+		// update coorinates
+	}
+	if len(adData.Pictures) != 0 {
+		oldAd.Pictures = adData.Pictures
 	}
 	mem.Data[adID] = oldAd
 

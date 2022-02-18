@@ -10,9 +10,12 @@ import (
 )
 
 type UpdateAdRequest struct {
-	Title       string  `json:"title"`
-	Description string  `json:"description"`
-	Price       float64 `json:"price"`
+	Title       string          `json:"title"`
+	Description string          `json:"description"`
+	Price       float64         `json:"price"`
+	Capacity    int             `json:"capacity"`
+	Pictures    []string        `json:"pictures"`
+	Location    domain.Location `json:"location"`
 }
 
 func UpdateAdHandler(cmd utils.UpdateAdCmd) http.HandlerFunc {
@@ -31,6 +34,9 @@ func UpdateAdHandler(cmd utils.UpdateAdCmd) http.HandlerFunc {
 			Title:       updateAdReq.Title,
 			Description: updateAdReq.Description,
 			Price:       updateAdReq.Price,
+			Capacity:    updateAdReq.Capacity,
+			Pictures:    updateAdReq.Pictures,
+			Location:    updateAdReq.Location,
 		}
 
 		if err = cmd(req.Context(), mux.Vars(req)["ad_id"], ad); err != nil {

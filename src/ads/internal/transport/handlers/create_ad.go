@@ -8,10 +8,12 @@ import (
 )
 
 type CreateAdRequest struct {
-	Title       string  `json:"title"`
-	Description string  `json:"description"`
-	Price       float64 `json:"price"`
-	Picture     string  `json:"picture"`
+	Title       string          `json:"title"`
+	Description string          `json:"description"`
+	Capacity    int             `json:"capacity"`
+	Price       float64         `json:"price"`
+	Pictures    []string        `json:"pictures"`
+	Location    domain.Location `json:"location"`
 }
 
 type CreateAdResponse struct {
@@ -33,8 +35,10 @@ func CreateAdHandler(cmd utils.CreateAdCmd) http.HandlerFunc {
 		ad := domain.Ad{
 			Title:       createAdReq.Title,
 			Description: createAdReq.Description,
+			Capacity:    createAdReq.Capacity,
 			Price:       createAdReq.Price,
-			Picture:     createAdReq.Picture,
+			Pictures:    createAdReq.Pictures,
+			Location:    createAdReq.Location,
 		}
 		adID, err := cmd(req.Context(), ad)
 

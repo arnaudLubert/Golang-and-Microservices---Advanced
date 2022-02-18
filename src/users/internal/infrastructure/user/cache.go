@@ -18,21 +18,21 @@ func NewCache() *Cache {
 	if os.Getenv("ENV") == "dev" {
 		cache.Create(nil, domain.User{
 			ID:       "1",
-			Login:    "client",
+			Pseudo:    "client",
 			Email:    "client@domain.com",
 			Password: security.MD5("password"),
 			Access:   0,
 		})
 		cache.Create(nil, domain.User{
 			ID:       "2",
-			Login:    "client2",
+			Pseudo:    "client2",
 			Email:    "client2@domain.com",
 			Password: security.MD5("password"),
 			Access:   0,
 		})
 		cache.Create(nil, domain.User{
 			ID:       "3",
-			Login:    "admin",
+			Pseudo:    "admin",
 			Email:    "admin@domain.com",
 			Password: security.MD5("password"),
 			Access:   2,
@@ -50,8 +50,8 @@ func (mem *Cache) Create(_ context.Context, newUser domain.User) error {
 
 	// must be unique
 	for _, user := range mem.Data {
-		if user.Login == newUser.Login {
-			return domain.ErrUserLoginAlreadyExists
+		if user.Pseudo == newUser.Pseudo {
+			return domain.ErrUserPseudoAlreadyExists
 		} else if user.Email == newUser.Email {
 			return domain.ErrUserEmailAlreadyExists
 		}
@@ -130,7 +130,7 @@ func (mem *Cache) Get(ctx context.Context, userID string) (*domain.User, error) 
 	}
 
 	if sessionInfo.UserID != userID && sessionInfo.Access < 1 {
-		user.Login = ""
+		user.Pseudo = ""
 		user.Password = ""
 
 		return &user, nil
@@ -147,10 +147,10 @@ func (mem *Cache) GetAccess(_ context.Context, userID string) (int8, error) {
 	return user.Access, nil
 }
 
-func (mem *Cache) GetLogin(_ context.Context, login string, password string) (string, error) {
+func (mem *Cache) GetLogin(_ context.Context, pseudo string, password string) (string, error) {
 
 	for _, user := range mem.Data {
-		if user.Login == login && user.Password == password {
+		if user.Pseudo == pseudo && user.Password == password {
 			return user.ID, nil
 		}
 	}
