@@ -1,0 +1,38 @@
+networks:
+  microservices:
+    name: microservices
+    driver: bridge
+
+services:
+  users:
+    build: users
+    environment:
+      - GO111MODULE=off
+    ports:
+      - 8081:8081
+    networks:
+      - microservices
+  authentication:
+    build: authentication
+    environment:
+      - GO111MODULE=off
+    ports:
+      - 8082:8082
+    networks:
+      - microservices
+  ads:
+    build: ads
+    environment:
+      - GO111MODULE=off
+    ports:
+      - 8083:8083
+    networks:
+      - microservices
+  transactions:
+    build: transactions
+    environment:
+      - GO111MODULE=off
+    ports:
+      - 8085:8085
+    networks:
+      - microservices

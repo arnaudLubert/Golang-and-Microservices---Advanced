@@ -1,0 +1,8 @@
+.DS_Store
+main
+go.sum
+bin
+src/ads/ads
+src/users/users
+src/authentication/authentication
+src/transactions/transactions

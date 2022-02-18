@@ -1,0 +1,10 @@
+host: 
+port: 8083
+storage: cache
+
+credentials:
+  api_key: WXsC3dO6ZAF3NgEfz
+
+auth_service:
+  url: http://authentication:8082
+  api_key: PfS4QVL9dfZEe8RzOAq5Z31Er

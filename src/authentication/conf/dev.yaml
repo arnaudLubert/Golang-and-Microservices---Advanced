@@ -1,0 +1,10 @@
+host: 
+port: 8082
+storage: cache
+
+credentials:
+    api_key: PfS4QVL9dfZEe8RzOAq5Z31Er
+
+users_service:
+    url: http://users:8081
+    api_key: WXsC3dO6ZAF3NgEfz

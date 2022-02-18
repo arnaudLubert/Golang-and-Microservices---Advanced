@@ -1,0 +1,16 @@
+host:
+port: 8085
+storage: cache
+
+credentials:
+  api_key: HbW2Q4wokl5M
+
+auth_service:
+#  url: http://localhost:8082
+  url: http://authentication:8082
+  api_key: PfS4QVL9dfZEe8RzOAq5Z31Er
+
+ads_service:
+#  url: http://localhost:8083
+  url: http://ads:8083
+  api_key: WXsC3dO6ZAF3NgEfz
