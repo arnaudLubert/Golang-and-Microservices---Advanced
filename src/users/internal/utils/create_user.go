@@ -4,6 +4,7 @@ import (
 	"context"
 	"unicode"
 	"src/users/domain"
+	"src/users/internal/security"
 	"src/users/internal/infrastructure/user"
 
 	uuid "github.com/satori/go.uuid"
@@ -20,6 +21,7 @@ func CreateUser(storage user.Storage) CreateUserCmd {
 		} else if !IsValidPassword(user.Password) {
 			return "", domain.ErrUnsecuredPassword
 		}
+		user.Password = security.MD5(user.Password)
 		uuid := uuid.NewV4()
 /*
 		uuid, err := uuid.NewV4()

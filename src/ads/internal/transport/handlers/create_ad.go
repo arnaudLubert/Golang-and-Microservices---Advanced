@@ -48,6 +48,8 @@ func CreateAdHandler(cmd utils.CreateAdCmd) http.HandlerFunc {
 				http.Error(rw, err.Error(), http.StatusConflict)
 			case domain.ErrAccessForbidden, domain.ErrOperationNotPermitted:
 				http.Error(rw, err.Error(), http.StatusForbidden)
+			case domain.ErrMissingIBAN, domain.ErrAdNoTitle, domain.ErrAdNoDescription, domain.ErrAdNoPrice, domain.ErrAdNoCapacity, domain.ErrAdNoPicture, domain.ErrAdNoLocation:
+				http.Error(rw, err.Error(), http.StatusBadRequest)
 			default:
 				http.Error(rw, err.Error(), http.StatusInternalServerError)
 			}

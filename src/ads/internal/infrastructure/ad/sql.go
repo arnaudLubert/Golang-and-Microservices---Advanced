@@ -25,7 +25,7 @@ func (mem *SQL) UpdateBalance(_ context.Context, userID string, balanceInc float
 	return domain.ErrAdNotFound
 }
 
-func (mem *SQL) Search(_ context.Context, sellerID string, keywords []string) (*[]domain.Ad, error) {
+func (mem *SQL) Search(_ context.Context, coordinates []float64, distance float64) (*[]domain.Ad, error) {
 	return nil, domain.ErrAdNotFound
 }
 

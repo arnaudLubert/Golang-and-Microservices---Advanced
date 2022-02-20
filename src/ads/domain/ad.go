@@ -13,6 +13,8 @@ var (
 	ErrAdNoLocation         = errors.New("you must add a location")
 	ErrInvalidAdValues      = errors.New("Ad values are not valid")
 	ErrAdNotFound           = errors.New("Ad not found")
+	ErrMissingIBAN          = errors.New("Seller account is missing IBAN value")
+	ErrCannotRetreiveIBAN   = errors.New("Cannot retreive IBAN")
 )
 
 type Ad struct {

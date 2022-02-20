@@ -6,6 +6,7 @@ type Configuration struct {
     Storage         string      `yaml:"storage"`
     Credentials     Credentials `yaml:"credentials"`
     AuthService     Service     `yaml:"auth_service"`
+    UsersService    Service     `yaml:"users_service"`
 }
 
 type Credentials struct {

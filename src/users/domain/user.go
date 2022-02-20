@@ -20,5 +20,5 @@ type User struct {
     Password    string  `json:"-"`
     Access      int8    `json:"access"`
     Address     Address `json:"address"`
-    Iban        string  `json:"iban"`
+    IBAN        string  `json:"iban"`
 }

@@ -5,6 +5,7 @@ import (
     "src/users/domain"
     "encoding/json"
     "net/http"
+    "fmt"
 )
 
 func GetUsersHandler(cmd utils.GetUsersCmd) http.HandlerFunc {

@@ -6,11 +6,11 @@ import (
 	"context"
 )
 
-type SearchAdsCmd func(ctx context.Context, sellerID string, keywords []string) (*[]domain.Ad, error)
+type SearchAdsCmd func(ctx context.Context, coordinates []float64, distance float64) (*[]domain.Ad, error)
 
 func SearchAds(storage ad.Storage) SearchAdsCmd {
-	return func(ctx context.Context, sellerID string, keywords []string) (*[]domain.Ad, error) {
-		ads, err := storage.Search(ctx, sellerID, keywords)
+	return func(ctx context.Context, coordinates []float64, distance float64) (*[]domain.Ad, error) {
+		ads, err := storage.Search(ctx, coordinates, distance)
 
 		if err != nil {
 			return nil, err

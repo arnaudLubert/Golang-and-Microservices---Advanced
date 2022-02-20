@@ -2,10 +2,11 @@ package ad
 
 import (
 	"src/ads/domain"
-	"context"
-	"os"
-	"regexp"
 	"strings"
+	"context"
+	"regexp"
+	"math"
+	"os"
 )
 
 type Cache struct {
@@ -25,7 +26,7 @@ func NewCache() *Cache {
 			Price:       70,
 			SellerID:    "1",
 			Pictures:    []string{"https://media.istockphoto.com/photos/business-district-with-tall-modern-office-buildings-at-amsterdam-zuid-picture-id1313787429?b=1&k=20&m=1313787429&s=170667a&w=0&h=_AK9s-kRHxiw3RG4ToobxwVI4bzjgHaq3TeOtTsRq6s=", "https://media.istockphoto.com/photos/modern-elegant-kitchen-stock-photo-picture-id1297586166?b=1&k=20&m=1297586166&s=170667a&w=0&h=Ka-3OYiTlbCiwCJhoXeTqRewh3DI4qfSh1B0baJMcCk="},
-			Location: 	 domain.Location{"Madrid", "28000", "Street name", "38.8951", "-77.0364"},
+			Location: 	 domain.Location{"Nice", "06000", "Epitech, Masséna", 43.6958037, 7.2697099},
 		})
 	}
 
@@ -122,6 +123,29 @@ func hasMatchingSeller(ad domain.Ad, sellerID string) bool {
 	return ad.SellerID == sellerID
 }
 
+func (mem *Cache) Search(ctx context.Context, coordinates []float64, distance float64) (*[]domain.Ad, error) {
+	ads := make([]domain.Ad, 0, len(mem.Data))
+	for _, ad := range mem.Data {
+		if withinLocation(ad, coordinates, distance) {
+			ads = append(ads, ad)
+		}
+	}
+	return &ads, nil
+}
+
+func withinLocation(ad domain.Ad, coordinates []float64, targetDistance float64) bool {
+	a1 := ad.Location.Latitude * math.Pi / 180
+	a2 := coordinates[0] * math.Pi / 180
+	a3 := (coordinates[0] - ad.Location.Latitude) * math.Pi / 180
+	a4 := (coordinates[1] - ad.Location.Longitude) * math.Pi / 180
+	a := math.Sin(a3/2) * math.Sin(a3/2) + math.Cos(a1) * math.Cos(a2) * math.Sin(a4/2) * math.Sin(a4/2);
+	c := 2 * math.Atan2(math.Sqrt(a), math.Sqrt(1-a))
+	distance := 6371000 * c // in metres
+
+	return (distance < targetDistance)
+}
+
+/*
 func (mem *Cache) Search(ctx context.Context, sellerID string, keywords []string) (*[]domain.Ad, error) {
 	ads := make([]domain.Ad, 0, len(mem.Data))
 	for _, ad := range mem.Data {
@@ -131,6 +155,7 @@ func (mem *Cache) Search(ctx context.Context, sellerID string, keywords []string
 	}
 	return &ads, nil
 }
+*/
 
 func (mem *Cache) SearchBySeller(ctx context.Context, sellerID string) (*[]domain.Ad, error) {
 	ads := make([]domain.Ad, 0, len(mem.Data))

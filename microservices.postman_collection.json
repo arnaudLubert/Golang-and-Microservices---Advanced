@@ -1,0 +1,738 @@
+{
+	"info": {
+		"_postman_id": "de6da872-0dd3-4d3a-b9fe-9870a3b7bb67",
+		"name": "microservices",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "users",
+			"item": [
+				{
+					"name": "http://localhost:8081/users",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{users_host}}/users/",
+							"host": [
+								"{{users_host}}"
+							],
+							"path": [
+								"users",
+								""
+							],
+							"query": [
+								{
+									"key": "response_mode",
+									"value": "query",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "http://localhost:8081/users another",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{users_host}}/users/1234",
+							"host": [
+								"{{users_host}}"
+							],
+							"path": [
+								"users",
+								"1234"
+							],
+							"query": [
+								{
+									"key": "response_mode",
+									"value": "query",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "http://localhost:8081/new-account/",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"pseudo\": \"new-account\",\n    \"email\": \"new-account@email.com\",\n    \"firstname\": \"new\",\n    \"lastname\": \"account\",\n    \"password\": \"password\",\n    \"address\": {\n        \"city\": \"New York\",\n        \"street\": \"New Way\",\n        \"zip_code\": \"667\"\n    }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{users_host}}/new-account",
+							"host": [
+								"{{users_host}}"
+							],
+							"path": [
+								"new-account"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "http://localhost:8081/users?user_id=",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n        \"email\": \"mmmm@mmm.com\",\n        \"firstname\": \"blabla\",\n        \"lastname\": \"okoko\",\n        \"phone\": \"akaka\",\n        \"access\": 0,\n        \"address\": {\n            \"city\": \"ci\",\n            \"zip_code\": \"zzz\",\n            \"street\": \"str\"\n        },\n        \"iban\": \"DE91100000000123456789\"\n    }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{users_host}}/users/?user_id=",
+							"host": [
+								"{{users_host}}"
+							],
+							"path": [
+								"users",
+								""
+							],
+							"query": [
+								{
+									"key": "user_id",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "http://localhost:8081/users?user_id=",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n        \"email\": \"mmmm@mmm.com\",\n        \"firstname\": \"blabla\",\n        \"lastname\": \"okoko\",\n        \"phone\": \"akaka\",\n        \"access\": 0,\n        \"address\": {\n            \"city\": \"ci\",\n            \"zip_code\": \"zzz\",\n            \"street\": \"str\"\n        }\n    }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{users_host}}/users/?user_id=",
+							"host": [
+								"{{users_host}}"
+							],
+							"path": [
+								"users",
+								""
+							],
+							"query": [
+								{
+									"key": "user_id",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"pm.request.headers.add({key: 'x-api-key', value: 'WXsC3dO6ZAF3NgEfz' });"
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "ads",
+			"item": [
+				{
+					"name": "get ad",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{ads_host}}/ad/",
+							"host": [
+								"{{ads_host}}"
+							],
+							"path": [
+								"ad",
+								""
+							],
+							"query": [
+								{
+									"key": "response_mode",
+									"value": "query",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "search ads",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{ads_host}}/ad/?coordinate_latitude=43.694624&coordinate_longitude=7.242531&distance=5000",
+							"host": [
+								"{{ads_host}}"
+							],
+							"path": [
+								"ad",
+								""
+							],
+							"query": [
+								{
+									"key": "coordinate_latitude",
+									"value": "43.694624"
+								},
+								{
+									"key": "coordinate_longitude",
+									"value": "7.242531"
+								},
+								{
+									"key": "distance",
+									"value": "5000"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create ad",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"title\": \"ad\",\n    \"description\": \"1\",\n    \"price\": 70.50,\n    \"capacity\": 2,\n    \"pictures\": [\"https://socialistmodernism.com/wp-content/uploads/2017/07/placeholder-image.png?w=640\"],\n    \"location\": {\n        \"city\": \"Nice\",\n        \"zip_code\": \"06000\",\n        \"street\": \"Avenue  Vaillant\",\n        \"latitude\": 43.694624,\n        \"longitude\": 7.2403423\n    }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{ads_host}}/ad/",
+							"host": [
+								"{{ads_host}}"
+							],
+							"path": [
+								"ad",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update ad",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"description\": \"test\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{ads_host}}/ad/245f844d-0de6-40b8-9cf3-aadb1824ff49",
+							"host": [
+								"{{ads_host}}"
+							],
+							"path": [
+								"ad",
+								"245f844d-0de6-40b8-9cf3-aadb1824ff49"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete ad",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n        \"email\": \"mmmm@mmm.com\",\n        \"firstname\": \"blabla\",\n        \"lastname\": \"okoko\",\n        \"phone\": \"akaka\",\n        \"access\": 0,\n        \"address\": {\n            \"city\": \"ci\",\n            \"zip_code\": \"zzz\",\n            \"street\": \"str\"\n        }\n    }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{ads_host}}/ad/1234",
+							"host": [
+								"{{ads_host}}"
+							],
+							"path": [
+								"ad",
+								"1234"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"pm.request.headers.add({key: 'x-api-key', value: 'WXsC3dO6ZAF3NgEfz' });"
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "authentication",
+			"item": [
+				{
+					"name": "http://localhost:8082/login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"login\": \"client\",\n    \"password\": \"password\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{authentication_host}}/login",
+							"host": [
+								"{{authentication_host}}"
+							],
+							"path": [
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "http://localhost:8082/login admin",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"login\": \"admin\",\n    \"password\": \"password\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{authentication_host}}/login",
+							"host": [
+								"{{authentication_host}}"
+							],
+							"path": [
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "http://localhost:8082/logout",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{authentication_host}}/logout",
+							"host": [
+								"{{authentication_host}}"
+							],
+							"path": [
+								"logout"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "http://localhost:8082/session",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{authentication_host}}/session",
+							"host": [
+								"{{authentication_host}}"
+							],
+							"path": [
+								"session"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"pm.request.headers.add({key: 'x-api-key', value: 'PfS4QVL9dfZEe8RzOAq5Z31Er' });"
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "transactions",
+			"item": [
+				{
+					"name": "Index",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{transactions_host}}/transaction",
+							"host": [
+								"{{transactions_host}}"
+							],
+							"path": [
+								"transaction"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"ad_id\": \"ad1\",\r\n    \"bid_price\": 12,\r\n    \"message\": \"hi\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{transactions_host}}/transaction",
+							"host": [
+								"{{transactions_host}}"
+							],
+							"path": [
+								"transaction"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Show",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{transactions_host}}/transaction/12",
+							"host": [
+								"{{transactions_host}}"
+							],
+							"path": [
+								"transaction",
+								"12"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"ad_id\": \"1\",\r\n    \"bid_price\": 12,\r\n    \"message\": \"hi\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{transactions_host}}/transaction/12",
+							"host": [
+								"{{transactions_host}}"
+							],
+							"path": [
+								"transaction",
+								"12"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Destroy",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{transactions_host}}/transaction/12",
+							"host": [
+								"{{transactions_host}}"
+							],
+							"path": [
+								"transaction",
+								"12"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Accept",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "{{transactions_host}}/transaction/12/accept",
+							"host": [
+								"{{transactions_host}}"
+							],
+							"path": [
+								"transaction",
+								"12",
+								"accept"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Refuse",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "{{transactions_host}}/transaction/12/refuse",
+							"host": [
+								"{{transactions_host}}"
+							],
+							"path": [
+								"transaction",
+								"12",
+								"refuse"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Cancel",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "{{transactions_host}}/transaction/12/cancel",
+							"host": [
+								"{{transactions_host}}"
+							],
+							"path": [
+								"transaction",
+								"12",
+								"cancel"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"pm.request.headers.add({key: 'x-api-key', value: 'HbW2Q4wokl5M' });"
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "7ec2cb35-a8d7-4916-86a2-abd1cdc2af26",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "users_host",
+			"value": "localhost:8081"
+		},
+		{
+			"key": "balance_host",
+			"value": "localhost:8084"
+		},
+		{
+			"key": "ads_host",
+			"value": "localhost:8083"
+		},
+		{
+			"key": "authentication_host",
+			"value": "localhost:8082"
+		},
+		{
+			"key": "transactions_host",
+			"value": "localhost:8085"
+		}
+	]
+}

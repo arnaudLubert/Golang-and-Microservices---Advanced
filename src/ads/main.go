@@ -71,7 +71,7 @@ func initRouter(config conf.Configuration, adStorage ad.Storage) {
 	adRouter := router.PathPrefix("/ad").Subrouter()
 	adRouter.HandleFunc("/", handlers.SearchAdsHandler(utils.SearchAds(adStorage))).Methods("GET")
 	adRouter.Use(middlewares.AuthorizeSession(config.AuthService))
-	adRouter.HandleFunc("/", handlers.CreateAdHandler(utils.CreateAd(adStorage))).Methods("POST")
+	adRouter.HandleFunc("/", handlers.CreateAdHandler(utils.CreateAd(config.UsersService, adStorage))).Methods("POST")
 	adRouter.HandleFunc("/{ad_id}", handlers.GetAdHandler(utils.GetAd(adStorage))).Methods("GET")
 	adRouter.HandleFunc("/{ad_id}", handlers.UpdateAdHandler(utils.UpdateAd(adStorage))).Methods("PUT")
 	adRouter.HandleFunc("/{ad_id}", handlers.DeleteAdHandler(utils.DeleteAd(adStorage))).Methods("DELETE")

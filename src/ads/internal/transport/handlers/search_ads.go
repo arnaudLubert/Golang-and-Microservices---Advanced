@@ -5,13 +5,29 @@ import (
 	"src/ads/internal/utils"
 	"encoding/json"
 	"net/http"
+	"strconv"
 )
 
 func SearchAdsHandler(cmd utils.SearchAdsCmd) http.HandlerFunc {
 	return func(rw http.ResponseWriter, req *http.Request) {
-		urlParameters := req.URL.Query()
-		ads, err := cmd(req.Context(), urlParameters.Get("sellerId"), urlParameters["keywords"])
-		if err != nil {
+		var distance float64
+		var err error
+
+		query := req.URL.Query()
+		coordinates := make([]float64, 2)
+
+		if coordinates[0], err = strconv.ParseFloat(query.Get("coordinate_latitude"), 64); err != nil {
+			http.Error(rw, err.Error(), http.StatusBadRequest)
+			return
+		} else if coordinates[1], err = strconv.ParseFloat(query.Get("coordinate_longitude"), 64); err != nil {
+			http.Error(rw, err.Error(), http.StatusBadRequest)
+			return
+		} else if distance, err = strconv.ParseFloat(query.Get("distance"), 64); err != nil {
+			http.Error(rw, err.Error(), http.StatusBadRequest)
+			return
+		}
+
+		if ads, err := cmd(req.Context(), coordinates, distance); err != nil {
 			switch err {
 			case domain.ErrAdNotFound:
 				http.Error(rw, err.Error(), http.StatusNotFound)

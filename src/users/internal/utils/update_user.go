@@ -23,6 +23,10 @@ func UpdateUser(storage user.Storage) UpdateUserCmd {
         if sessionInfo.UserID != userID && sessionInfo.Access < 1 {
             return domain.ErrOperationNotPermitted
         }
+
+        if userData.IBAN != "" && len(userData.IBAN) < 22 {
+            return domain.ErrInvalidIBAN
+        }
         err := storage.Update(ctx, userID, userData)
 
         if err != nil {

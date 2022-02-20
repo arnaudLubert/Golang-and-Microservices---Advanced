@@ -23,7 +23,7 @@
 
 # Ads
 
-- GET /ad/
+- GET /ad/ ?coordinate_latitude=[float] &coordinate_longitude=[float] &distance=[float - meter]
 - POST /ad/
 - GET /ad/{ad_id}
 - GET /ad/{ad_id}

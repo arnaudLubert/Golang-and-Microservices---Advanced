@@ -1,7 +1,6 @@
 package handlers
 
 import (
-    "src/users/internal/security"
     "src/users/internal/utils"
     "src/users/domain"
     "encoding/json"
@@ -9,7 +8,7 @@ import (
 )
 
 type CreateUserRequest struct {
-    Pseudo       string          `json:"login"`
+    Pseudo       string         `json:"pseudo"`
     Email       string          `json:"email"`
     Password    string          `json:"password"`
     Firstname   string          `json:"firstname"`
@@ -36,14 +35,14 @@ func CreateUserHandler(cmd utils.CreateUserCmd) http.HandlerFunc {
         }
 
         if createUserReq.Pseudo == "" || createUserReq.Email == "" || createUserReq.Password == "" {
-            http.Error(rw, "missing login, email nor password", http.StatusBadRequest)
+            http.Error(rw, "missing pseudo, email nor password", http.StatusBadRequest)
             return
         }
 
         user := domain.User{
             Pseudo: createUserReq.Pseudo,
             Email: createUserReq.Email,
-            Password: security.MD5(createUserReq.Password),
+            Password: createUserReq.Password,
             Firstname: createUserReq.Firstname,
             Lastname: createUserReq.Lastname,
             Phone: createUserReq.Phone,

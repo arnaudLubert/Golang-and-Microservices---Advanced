@@ -38,6 +38,7 @@ func UpdateUserHandler(cmd utils.UpdateUserCmd) http.HandlerFunc {
         if err = cmd(req.Context(), req.URL.Query().Get("user_id"), user); err != nil {
             switch err {
             case domain.ErrUserNotFound: http.Error(rw, err.Error(), http.StatusNotFound)
+            case domain.ErrInvalidIBAN: http.Error(rw, err.Error(), http.StatusBadRequest)
             case domain.ErrUserAlreadyExists: http.Error(rw, err.Error(), http.StatusConflict)
             case domain.ErrAccessForbidden, domain.ErrOperationNotPermitted:
                 http.Error(rw, err.Error(), http.StatusForbidden)
