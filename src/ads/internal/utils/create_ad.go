@@ -8,7 +8,6 @@ import (
 	"net/http"
 	"io/ioutil"
 	"time"
-	"fmt"
 
 	uuid "github.com/satori/go.uuid"
 )
@@ -31,7 +30,7 @@ func CreateAd(usersService conf.Service, storage ad.Storage) CreateAdCmd {
 		ad.SellerID = sessionInfo.UserID
 
 		ibanRequest, err := http.NewRequest("GET", usersService.Url + "/iban/" + sessionInfo.UserID, nil)
-fmt.Println(sessionInfo.UserID)
+
 		if err != nil {
 			return "", domain.ErrCannotRetreiveIBAN
 		}
