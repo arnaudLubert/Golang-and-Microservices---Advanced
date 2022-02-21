@@ -71,7 +71,7 @@ func initRouter(config conf.Configuration, userStorage user.Storage) {
 	router.HandleFunc("/auth/login", handlers.GetLoginHandler(utils.GetLogin(userStorage))).Methods("POST")
 	router.HandleFunc("/auth/access/{user_id}", handlers.GetUserAccessHandler(utils.GetUserAccess(userStorage))).Methods("GET")
 	router.HandleFunc("/new-account", handlers.CreateUserHandler(utils.CreateUser(userStorage))).Methods("POST")
-	router.HandleFunc("/iban", handlers.GetUserIbanHandler(utils.GetUser(userStorage))).Methods("GET")
+	router.HandleFunc("/iban/{user_id}", handlers.GetUserIbanHandler(utils.GetUserUnsecured(userStorage))).Methods("GET")
 
 	userRouter := router.PathPrefix("/users").Subrouter()
 	userRouter.Use(middlewares.AuthorizeSession(config.AuthService))

@@ -37,6 +37,9 @@ func (mem *SQL) GetLogin(_ context.Context, login string, password string) (stri
     return "", domain.ErrUserNotFound
 }
 
+func (mem *SQL) GetUserUnsecured(_ context.Context, userID string) (*domain.User, error) {
+    return nil, domain.ErrUserNotFound
+}
 
 func (mem *SQL) Delete(_ context.Context, userID string) error {
     return domain.ErrUserNotFound
