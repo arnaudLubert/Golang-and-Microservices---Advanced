@@ -4,12 +4,12 @@ import (
 	"log"
 	"net/http"
 	"os"
-	"src/users/internal/conf"
-	"src/users/internal/infrastructure/user"
-	"src/users/internal/logger"
-	"src/users/internal/transport/handlers"
-	"src/users/internal/transport/middlewares"
-	"src/users/internal/utils"
+	"src/reservation/internal/conf"
+	"src/reservation/internal/infrastructure/reservation"
+	"src/reservation/internal/logger"
+	//"src/reservation/internal/transport/handlers"
+	//"src/reservation/internal/transport/middlewares"
+	//"src/reservation/internal/utils"
 
 	"github.com/gorilla/mux"
 	"github.com/joho/godotenv"
@@ -27,15 +27,15 @@ func main() {
 	if !success {
 		os.Exit(1)
 	}
-	var userStorage user.Storage
+	var reservationStorage reservation.Storage
 
 	switch config.Storage {
 	case "cache":
-		userStorage = user.NewCache()
+		reservationStorage = reservation.NewCache()
 	case "database":
-		userStorage = user.NewSQL()
+		reservationStorage = reservation.NewSQL()
 	}
-	initRouter(config, userStorage)
+	initRouter(config, reservationStorage)
 
 	server := &http.Server{Addr: config.Host + ":" + config.Port}
 	logger.Log("Server listening on: " + server.Addr)
@@ -61,13 +61,13 @@ func initConfig() (conf.Configuration, bool) {
 	return config, true
 }
 
-func initRouter(config conf.Configuration, userStorage user.Storage) {
+func initRouter(config conf.Configuration, reservationStorage reservation.Storage) {
 	router := mux.NewRouter()
 
 	router.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
 		w.Write([]byte("Welcome to the reservation API"))
 	})
-	router.Use(middlewares.AuthorizeService(config.Credentials))
+	//router.Use(middlewares.AuthorizeService(config.Credentials))
 
 	// router.HandleFunc("/auth/login", handlers.GetLoginHandler(utils.GetLogin(userStorage))).Methods("POST")
 	// router.HandleFunc("/auth/access/{user_id}", handlers.GetUserAccessHandler(utils.GetUserAccess(userStorage))).Methods("GET")

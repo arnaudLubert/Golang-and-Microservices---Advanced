@@ -1,8 +1,8 @@
 package middlewares
 
 import (
-    "src/users/internal/conf"
-    "src/users/domain"
+    "src/reservation/internal/conf"
+    "src/reservation/domain"
     "github.com/gorilla/mux"
     "encoding/json"
     "net/http"

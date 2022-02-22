@@ -1,6 +1,6 @@
 FROM golang:1.17
 
-WORKDIR /go/src/users
+WORKDIR /go/src/reservation
 
 ENV GO111MODULE=off
 

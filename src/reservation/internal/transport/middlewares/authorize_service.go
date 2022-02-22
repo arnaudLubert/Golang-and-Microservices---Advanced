@@ -1,7 +1,7 @@
 package middlewares
 
 import (
-    "src/users/internal/conf"
+    "src/reservation/internal/conf"
     "github.com/gorilla/mux"
     "net/http"
 )

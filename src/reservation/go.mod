@@ -1,4 +1,4 @@
-module src/users
+module src/reservation
 
 go 1.17
 
