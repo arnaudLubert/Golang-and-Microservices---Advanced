@@ -1,0 +1,11 @@
+host:
+port: 8086
+storage: cache
+
+credentials:
+    api_key: b7e26f7611ff8bb2403d970a6cb6e1da
+
+# auth_service:
+#     # url: http://authentication:8082
+#     url: http://localhost:8082
+#     api_key: PfS4QVL9dfZEe8RzOAq5Z31Er
