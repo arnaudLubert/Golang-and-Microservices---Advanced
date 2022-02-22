@@ -173,6 +173,26 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "Get Iban",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8081/iban/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"iban",
+								"1"
+							]
+						}
+					},
+					"response": []
 				}
 			],
 			"event": [
@@ -199,43 +219,6 @@
 		{
 			"name": "ads",
 			"item": [
-				{
-					"name": "get ad",
-					"protocolProfileBehavior": {
-						"disableBodyPruning": true
-					},
-					"request": {
-						"method": "GET",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "{{ads_host}}/ad/",
-							"host": [
-								"{{ads_host}}"
-							],
-							"path": [
-								"ad",
-								""
-							],
-							"query": [
-								{
-									"key": "response_mode",
-									"value": "query",
-									"disabled": true
-								}
-							]
-						}
-					},
-					"response": []
-				},
 				{
 					"name": "search ads",
 					"protocolProfileBehavior": {
@@ -688,7 +671,7 @@
 		"bearer": [
 			{
 				"key": "token",
-				"value": "7ec2cb35-a8d7-4916-86a2-abd1cdc2af26",
+				"value": "5e293bb4-3894-415f-bb21-6d40fae915a3",
 				"type": "string"
 			}
 		]

@@ -13,6 +13,7 @@ type UpdateUserRequest struct {
     Lastname    string          `json:"lastname"`
     Phone       string          `json:"phone"`
     Address     domain.Address  `json:"address"`
+    IBAN        string          `json:"iban"`
 }
 
 func UpdateUserHandler(cmd utils.UpdateUserCmd) http.HandlerFunc {
@@ -33,6 +34,7 @@ func UpdateUserHandler(cmd utils.UpdateUserCmd) http.HandlerFunc {
             Lastname: updateUserReq.Lastname,
             Phone: updateUserReq.Phone,
             Address: updateUserReq.Address,
+            IBAN: updateUserReq.IBAN,
         }
 
         if err = cmd(req.Context(), req.URL.Query().Get("user_id"), user); err != nil {

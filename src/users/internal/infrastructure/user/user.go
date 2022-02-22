@@ -12,5 +12,6 @@ type Storage interface {
     Get(ctx context.Context, ID string) (*domain.User, error)
     GetAccess(ctx context.Context, userID string) (int8, error)
     GetLogin(ctx context.Context, login string, password string) (string, error)
+    GetUserUnsecured(ctx context.Context, userID string) (*domain.User, error)
     Delete(ctx context.Context, ID string) error
 }

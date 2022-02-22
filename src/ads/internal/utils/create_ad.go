@@ -29,7 +29,7 @@ func CreateAd(usersService conf.Service, storage ad.Storage) CreateAdCmd {
 		ad.ID = uuid.String()
 		ad.SellerID = sessionInfo.UserID
 
-		ibanRequest, err := http.NewRequest("GET", usersService.Url + "/iban?user_id=" + sessionInfo.UserID, nil)
+		ibanRequest, err := http.NewRequest("GET", usersService.Url + "/iban/" + sessionInfo.UserID, nil)
 
 		if err != nil {
 			return "", domain.ErrCannotRetreiveIBAN

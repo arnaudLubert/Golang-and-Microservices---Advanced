@@ -86,6 +86,9 @@ func (mem *Cache) Update(_ context.Context, userID string, userData domain.User)
 	if userData.Address.Street != "" {
 		oldUser.Address.Street = userData.Address.Street
 	}
+	if userData.IBAN != "" {
+		oldUser.IBAN = userData.IBAN
+	}
 
 	// must be unique
 	if userData.Email != "" {
@@ -155,6 +158,15 @@ func (mem *Cache) GetLogin(_ context.Context, pseudo string, password string) (s
 		}
 	}
 	return "", domain.ErrUserNotFound
+}
+
+func (mem *Cache) GetUserUnsecured(_ context.Context, userID string) (*domain.User, error) {
+	user, ok := mem.Data[userID]
+
+	if !ok {
+		return nil, domain.ErrUserNotFound
+	}
+	return &user, nil
 }
 
 func (mem *Cache) Delete(_ context.Context, userID string) error {
