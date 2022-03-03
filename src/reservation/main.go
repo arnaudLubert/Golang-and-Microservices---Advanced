@@ -7,9 +7,9 @@ import (
 	"src/reservation/internal/conf"
 	"src/reservation/internal/infrastructure/reservation"
 	"src/reservation/internal/logger"
-	//"src/reservation/internal/transport/handlers"
-	//"src/reservation/internal/transport/middlewares"
-	//"src/reservation/internal/utils"
+	"src/reservation/internal/transport/handlers"
+	"src/reservation/internal/transport/middlewares"
+	"src/reservation/internal/utils"
 
 	"github.com/gorilla/mux"
 	"github.com/joho/godotenv"
@@ -67,9 +67,9 @@ func initRouter(config conf.Configuration, reservationStorage reservation.Storag
 	router.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
 		w.Write([]byte("Welcome to the reservation API"))
 	})
-	//router.Use(middlewares.AuthorizeService(config.Credentials))
+	router.Use(middlewares.AuthorizeService(config.Credentials))
 
-	// router.HandleFunc("/auth/login", handlers.GetLoginHandler(utils.GetLogin(userStorage))).Methods("POST")
+	router.HandleFunc("/resa/create", handlers.CreateReservationHandler(utils.CreateReservation(reservationStorage))).Methods("POST")
 	// router.HandleFunc("/auth/access/{user_id}", handlers.GetUserAccessHandler(utils.GetUserAccess(userStorage))).Methods("GET")
 	// router.HandleFunc("/new-account", handlers.CreateUserHandler(utils.CreateUser(userStorage))).Methods("POST")
 	// router.HandleFunc("/iban", handlers.GetUserIbanHandler(utils.GetUser(userStorage))).Methods("GET")
