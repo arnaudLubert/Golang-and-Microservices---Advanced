@@ -37,3 +37,46 @@ services:
     networks:
       - microservices
 
+  sql-server-users:
+      container_name: sql-server-users
+      image: mcr.microsoft.com/mssql/server:2019-latest
+      ports:
+        - "7081:7081"
+      environment:
+        SA_PASSWORD: "!Userspass101"
+        ACCEPT_EULA: "Y"
+      networks:
+        - microservices
+
+  sql-server-authentification:
+      container_name: sql-server-authentification
+      image: mcr.microsoft.com/mssql/server:2019-latest
+      ports:
+        - "7082:7082"
+      environment:
+        SA_PASSWORD: "!Userspass101"
+        ACCEPT_EULA: "Y"
+      networks:
+        - microservices
+
+  sql-server-ads:
+      container_name: sql-server-ads
+      image: mcr.microsoft.com/mssql/server:2019-latest
+      ports:
+        - "7083:7083"
+      environment:
+        SA_PASSWORD: "!Userspass101"
+        ACCEPT_EULA: "Y"
+      networks:
+        - microservices
+
+  sql-server-transaction:
+      container_name: sql-server-transaction
+      image: mcr.microsoft.com/mssql/server:2019-latest
+      ports:
+        - "7085:7085"
+      environment:
+        SA_PASSWORD: "!Userspass101"
+        ACCEPT_EULA: "Y"
+      networks:
+        - microservices
