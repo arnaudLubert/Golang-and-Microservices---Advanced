@@ -36,3 +36,4 @@ services:
       - 8085:8085
     networks:
       - microservices
+
